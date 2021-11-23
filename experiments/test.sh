@@ -1,0 +1,1 @@
+python testVal.py stereo --exp_id sub_dla34 --dataset kitti --kitti_split subcnn --resume
