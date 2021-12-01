@@ -4,50 +4,6 @@ This document provides tutorials to train and evaluate CenterNet. Before getting
 
 ## Benchmark evaluation
 
-First, download the models you want to evaluate from our [model zoo](MODEL_ZOO.md) and put them in `CenterNet_ROOT/models/`. 
-
-### COCO
-
-To evaluate COCO object detection with DLA
-run
-
-~~~
-python test.py ctdet --exp_id coco_dla --keep_res --load_model ../models/ctdet_coco_dla_2x.pth
-~~~
-
-This will give an AP of `37.4` if setup correctly. `--keep_res` is for keep the original image resolution. Without `--keep_res` it will resize the images to `512 x 512`. You can add `--flip_test` and `--flip_test --test_scales 0.5,0.75,1,1.25,1.5` to the above commend, for flip test and multi_scale test, respectively. The expected APs are `39.2` and `41.7`, respectively.
-
-To test with hourglass net, run
-
-~~~
-python test.py ctdet --exp_id coco_hg --arch hourglass --fix_res --load_model ../models/ctdet_coco_hg.pth
-~~~
-
-Similarly, to evaluate human pose estimation, run the following command for dla
-
-~~~
-python test.py multi_pose --exp_id dla --keep_res --load_model ../models/multi_pose_dla_3x.pth --flip_test
-~~~
-
-and the following for hourglass
-
-~~~
-python test.py multi_pose --exp_id hg --arch hourglass --keep_res --load_model ../models/multi_pose_dla_3x.pth --flip_test
-~~~
-
-The expected results can be found in the model zoo.
-
-### Pascal
-
-To evaluate object detection on Pascal VOC (test2007), run
-
-~~~
-python test.py ctdet --exp_id dla --dataset pascal --load_model ../models/ctdet_pascal_dla.pth --flip_test
-~~~
-
-Note that we fix the resolution during testing.
-And you can change to other network architectures and resolutions by specifying `--arch` and `--input_res 512`.
-
 ### KITTI
 
 To evaluate the kitti dataset, first compile the evaluation tool (from [here](https://github.com/prclibo/kitti_eval)):
